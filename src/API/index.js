@@ -30,7 +30,7 @@ export async function createPost(postData) {
 
 export async function deletePost() {
     try {
-        const response = await fetch(`${BASE_URL}`, {
+        const response = await fetch(`${BASE_URL}/posts`, {
             method: "DELETE",
         });
         const result = await response.json();
