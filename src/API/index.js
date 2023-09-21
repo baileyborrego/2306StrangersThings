@@ -40,3 +40,27 @@ export async function deletePost() {
     }
 }
 
+export const fetchToken = async (username, password) => {
+  
+    try {
+      const response = await fetch(`${BASE_URL}/users/registerLogin`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            user: {
+              username: `${username}`,
+              password: `${password}`
+            }
+        })
+      });
+        const result = await response.json();
+        console.log(username, password);
+        sessionStorage.token = result.data.token;
+        return localStorage.token;
+    } catch (err) {
+      console.error(err);
+    }
+}
+
