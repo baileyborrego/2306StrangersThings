@@ -13,7 +13,7 @@ function App() {
     </div>
     <Routes>
         <Route path='/' element={<AllPosts />} />
-        <Route path='/:id' element={<SinglePost />} />
+        {/* <Route path='/:id' element={<SinglePost />} /> */}
     </Routes> 
       
     </>
