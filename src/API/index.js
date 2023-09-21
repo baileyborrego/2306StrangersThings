@@ -11,3 +11,15 @@ export const fetchAllPosts = async () => {
         console.error('Uh oh, trouble fetching posts!', err);
     }
 };
+
+export async function deletePost() {
+    try {
+      const response = await fetch(`${BASE_URL}`, {
+        method: "DELETE"
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+};
