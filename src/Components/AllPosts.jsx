@@ -9,16 +9,19 @@ export default function AllPosts () {
         async function getAllPosts() {
             const APIResponse = await fetchAllPosts();
             if(APIResponse.success){
-                setPosts(APIResponse.data)
+                setPosts(APIResponse.data.posts)
             } else {
                 setError(APIResponse.error.message)
             }
         }
+        getAllPosts();
     },[]);
 
     return(
         <>
-        
+        {posts.map((post)=> {
+            return <h3 key={post.id}>{post.title}</h3>
+        })}
         </>
     )
 }
