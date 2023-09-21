@@ -13,8 +13,12 @@ function App() {
     </div>
     <Routes>
         <Route path='/' element={<AllPosts />} />
+<<<<<<< HEAD
         {/* <Route path='/' element={<ProfileMessages />} />
         <Route path='/' element={<LoginRegister />} /> */}
+=======
+        <Route path='/:id' element={<SinglePost />} />
+>>>>>>> 9f7a8b969cae0a987370d5b9987672cf5fd3e5d2
     </Routes> 
       
     </>
