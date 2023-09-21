@@ -12,6 +12,20 @@ export const fetchAllPosts = async () => {
     }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function createPost(postData) {
     try {
       const response = await fetch(`${BASE_URL}/posts`, {
