@@ -11,3 +11,19 @@ export const fetchAllPosts = async () => {
         console.error('Uh oh, trouble fetching posts!', err);
     }
 };
+
+export async function createPost(postData) {
+    try {
+      const response = await fetch(`${BASE_URL}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  }
