@@ -12,14 +12,19 @@ export const fetchAllPosts = async () => {
     }
 };
 
-export async function createPost(postData) {
+export async function createPost(postData, token) {
     try {
+        // Assuming 'token' contains the user's JWT unless we change it
         const response = await fetch(`${BASE_URL}/posts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(postData),
+            body: JSON.stringify({
+                ...postData,
+                username: token.username 
+            }),
         });
         const result = await response.json();
         return result;
@@ -27,6 +32,7 @@ export async function createPost(postData) {
         console.error(error);
     }
 }
+
 
 export async function deletePost() {
     try {
@@ -63,6 +69,64 @@ export async function editPost(postId, updatedData) {
       return null; // can handle the error as needed
   }
 }
+
+export async function fetchMessages(token) {
+    try {
+      const response = await fetch(`${BASE_URL}/messages`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      if (data.success) {
+        return data.data.messages;
+      } else {
+        console.error('API request failed:', data.error);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+      return [];
+    }
+  }
+
+export async function sendMessageToPost(postId, messageContent, token) {
+    try {
+        const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                message: {
+                    content: messageContent
+                }
+            })
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function deleteMessage(messageId, token) {
+    try {
+      const response = await fetch(`${BASE_URL}/messages/${messageId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Error deleting message:', error);
+      throw error;
+    }
+  }
 
 // Usage example:
 const postIdToUpdate = ''; // Replace with the ID of the post you want to update
