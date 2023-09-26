@@ -48,7 +48,7 @@ const MessageList = ({ token }) => {
       <ul>
         {messages.map((message) => (
           <li key={message._id}>
-            {message.sender.username}: {message.text}
+            From:{message.sender.username}: {message.text}
             {message.sender._id === token._id && (
               <button onClick={() => handleDeleteMessage(message._id)}>
                 Delete

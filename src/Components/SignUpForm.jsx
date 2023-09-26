@@ -15,7 +15,7 @@ export default function SignUpForm({setToken}) {
             setPassword("");
 
         } else {
-            setError(APIData.error)
+            setError(APIData.error  )
         }
     }
     return (

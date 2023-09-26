@@ -20,29 +20,26 @@ export default function AllPosts () {
         getAllPosts();
     },[]);
 
-    return(
+    const postToDisplay = searchParam
+        ? posts.filter((post) => 
+        posts.title.toLowerCase().includes(searchParam))
+        : posts; 
+    return (
         <>
+        <div>
+         <label>
+           Search:{" "}
+          <input type="text" 
+             placeholder="search"
+           onChange={(e) => setSearchParam(e.target.value.toLowerCase())}/>
+         </label>
+        </div>
         {posts.map((post)=> {
             return <h3 key={post.id}>{post.title}</h3>
         })}
         </>
+        
+        
     )
 
-    const postToDisplay = searchParam
-    ? post.filter((post) => 
-    post.title.toLowerCase().includes(searchParam)
-    )
-    : posts;    
-        return (
-            <div>
-                <div>
-                    <label>
-                        Search:{" "}
-                        <input type="text" 
-                        placeholder="search"
-                        onChange={(e) => setSearchParam(e.target.value.toLowerCase())}/>
-                    </label>
-                </div>
-            </div>
-        )
 }
