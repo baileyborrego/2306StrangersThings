@@ -7,6 +7,10 @@ function App() {
 
   return (
     <>
+    <div id="header">
+      <h1>Stranger's Things</h1>
+      <h2>Welcome, [user]!</h2> {/* have this display the username of the person logged in, might need it to be in a different component, we'll see */}
+    </div>
     <div>
       <Link to='/'>All Posts</Link>
       {/* <Link to='/:id'>Single Post</Link> */}
