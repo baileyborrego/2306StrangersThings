@@ -27,7 +27,6 @@ function App() {
         <Route path='/' element={<LoginRegister />} /> */}
     </Routes>   
         {/* <Route path='/:id' element={<SinglePost />} /> */}
-    </Routes> 
       
     </>
   )
