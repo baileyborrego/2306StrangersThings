@@ -10,23 +10,25 @@ function App() {
 
   return (
     <>
-    <SignUpForm token={token} setToken={setToken} />
-    <Authenticate token={token} setToken={setToken} />
+
     <div id="header">
       <h1>Stranger's Things</h1>
       <h2>Welcome, [user]!</h2> {/* have this display the username of the person logged in, might need it to be in a different component, we'll see */}
     </div>
     <div>
       <Link to='/'>All Posts</Link>
-      {/* <Link to='/posts/POST_ID/messages'>Profile Messages</Link>
-      <Link to='/users/login'>Login/Register</Link> */}
+      <Link to='/users/register'>Register</Link>
+      <Link to='/users/login'>Sign In</Link>
+      {/* <Link to='/posts/POST_ID/messages'>Profile Messages</Link> */}
+
     </div>
     <Routes>
         <Route path='/' element={<AllPosts />} />
-        {/* <Route path='/' element={<ProfileMessages />} />
-        <Route path='/' element={<LoginRegister />} /> */}
+        <Route path='/users/register' element={<SignUpForm token={token} setToken={setToken} />} />
+        <Route path='/users/login' element={<Authenticate token={token} setToken={setToken}/>} />
+        {/* <Route path='/' element={<ProfileMessages />} /> */}
     </Routes>   
-        {/* <Route path='/:id' element={<SinglePost />} /> */}
+
       
     </>
   )

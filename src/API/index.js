@@ -58,6 +58,7 @@ export const createUser = async (username, password) => {
               password: password
             }
         })
+        
       });
         const result = await response.json();
         console.log(result);
