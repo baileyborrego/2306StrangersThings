@@ -10,10 +10,10 @@ export default function SignUpForm({setToken}) {
         event.preventDefault();
         const APIData = await createUser(username, password);
         if (APIData.success) {
-            setToken(result.token)
+            setToken(APIData.token)
 
         } else {
-            setError(APIData.error)
+            setError(APIData.error  )
         }
 
         

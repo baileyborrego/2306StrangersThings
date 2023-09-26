@@ -54,8 +54,8 @@ export const createUser = async (username, password) => {
         },
         body: JSON.stringify({
             user: {
-              username: `${username}`,
-              password: `${password}`
+              username: username,
+              password: password
             }
         })
       });
@@ -77,8 +77,8 @@ export const fetchToken = async (username, password) => {
         },
         body: JSON.stringify({
             user: {
-              username: `${username}`,
-              password: `${password}`
+              username: username,
+              password: password
             }
           })
         });

@@ -9,9 +9,9 @@ export default function Authenticate({ token }) {
       event.preventDefault();
       const APIData = await fetchToken();
       if (APIData.success){
-        const username = result.data.username;
+        const username = APIData.data.username;
           console.log(username)
-          setSuccessMessage(`${result.message} Welcome ${username}`)
+          setSuccessMessage(`${APIData.message} Welcome ${username}`)
       } else {
             setError(APIData.error);
         }
