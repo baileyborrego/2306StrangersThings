@@ -1,43 +1,71 @@
-
-//=============CONCERNS==========
-//My only bug type concerns are related to API endpoints. might start there is future issues arise
-
 import React, { useEffect, useState } from "react";
+import { fetchMessages, sendMessageToPost, deleteMessage } from "../API";
 
-const MessageList = () => {
+const MessageList = ({ token }) => {
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    async function fetchMessages() {
-      try {
-        const response = await fetch(
-          "https://strangers-things.herokuapp.com/api/2306-FTB-ET-WEB-FT/posts"
-        );
-        const APIResponse = await response.json();
-        if (APIResponse.success) {
-          const fetchedMessages = APIResponse.data.posts.messages; // Assuming messages are nested in the API this way? - might be buggy
-          setMessages(fetchedMessages);
-        } else {
-          console.error("OOPS :( ", APIResponse.error);
-        }
-      } catch (error) {
-        console.error("Error loading messages:", error);
-      }
+    // grabbing the messages
+    fetchMessages()
+      .then((fetchedMessages) => setMessages(fetchedMessages))
+      .catch((error) => console.error("Error fetching messages:", error));
+  }, []);
+
+  const handleSendMessage = async () => {
+    if (newMessage.trim() === "") {
+      // delete trim if buggy, found it online
+      console.error("Cannot send an empty message.");
+      return;
     }
 
-    fetchMessages();
-  }, []);
+    try {
+      const result = await sendMessageToPost(token, newMessage);
+      // Assuming the API returns the updated list of messages after sending - im trying to streamline this into one component
+      setMessages(result.messages);
+      setNewMessage(""); // hopefully shows a blank space after the message sent
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      await deleteMessage(token, messageId);
+      // filter out the deleted message from the current messages - so you actually delete messages
+      const updatedMessages = messages.filter(
+        (message) => message._id !== messageId
+      );
+      setMessages(updatedMessages);
+    } catch (error) {
+      console.error("Error deleting message:", error);
+    }
+  };
 
   return (
     <div>
       <h1>Direct Messages</h1>
       <ul>
-        {messages.map((message, _id) => ( //i think its weird the api has "_id" but hopefully it works
-          <li key={_id}>
+        {messages.map((message) => (
+          <li key={message._id}>
             {message.sender.username}: {message.text}
+            {message.sender._id === token._id && (
+              <button onClick={() => handleDeleteMessage(message._id)}>
+                Delete
+              </button>
+            )}
           </li>
         ))}
       </ul>
+      <div>
+        <input
+          type="text"
+          placeholder="Type your message..."
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+        />
+        <button onClick={handleSendMessage}>Send</button>
+      </div>
     </div>
   );
 };
