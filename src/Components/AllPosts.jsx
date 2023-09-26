@@ -28,7 +28,7 @@ export default function AllPosts () {
         </>
     )
 
-    const postToDisplay = searchParam
+    const postSearchBar = searchParam
     ? post.filter((post) => 
     post.title.toLowerCase().includes(searchParam)
     )
