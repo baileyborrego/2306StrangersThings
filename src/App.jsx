@@ -17,17 +17,16 @@ function App() {
     </div>
     <div>
       <Link to='/'>All Posts</Link>
-      {/* <Link to='/posts/POST_ID/messages'>Profile Messages</Link> */}
       <Link to='/users/register'>Register</Link>
-      {/* <Link to='/users/login'>Sign In</Link> */}
+      <Link to='/users/login'>Sign In</Link>
+      {/* <Link to='/posts/POST_ID/messages'>Profile Messages</Link> */}
 
     </div>
     <Routes>
         <Route path='/' element={<AllPosts />} />
-        <Route path='/users/register' element={<SignUpForm />} />
-        {/* <Route path='/users/login' element={<SignUpForm />} /> */}
+        <Route path='/users/register' element={<SignUpForm token={token} setToken={setToken} />} />
+        <Route path='/users/login' element={<Authenticate token={token} setToken={setToken}/>} />
         {/* <Route path='/' element={<ProfileMessages />} /> */}
-        {/* <Route path='/:id' element={<SinglePost />} /> */}
     </Routes>   
         
       
