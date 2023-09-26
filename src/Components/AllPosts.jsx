@@ -22,8 +22,10 @@ export default function AllPosts () {
 
     return(
         <>
+        
         {posts.map((post)=> {
             return <h3 key={post.id}>{post.title}</h3>
+            
         })}
         </>
     )
