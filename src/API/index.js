@@ -5,7 +5,6 @@ export const fetchAllPosts = async () => {
     try {
         const response = await fetch(`${BASE_URL}/posts`);
         const allPosts = await response.json();
-        console.log(allPosts);
         return allPosts;
     } catch (err) {
         console.error('Uh oh, trouble fetching posts!', err);
@@ -40,10 +39,9 @@ export async function deletePost() {
     }
 }
 
-export const fetchToken = async (username, password) => {
-  
+export const createUser = async (username, password) => {
     try {
-      const response = await fetch(`${BASE_URL}/users/registerLogin`, {
+      const response = await fetch(`${BASE_URL}/users/register`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -56,11 +54,35 @@ export const fetchToken = async (username, password) => {
         })
       });
         const result = await response.json();
-        console.log(username, password);
+        console.log(result);
         sessionStorage.token = result.data.token;
-        return localStorage.token;
+        return sessionStorage.token;
     } catch (err) {
       console.error(err);
     }
 }
+
+export const fetchToken = async (username, password) => {
+    try {
+        const response = await fetch(`${BASE_URL}/users/login`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+              username: `${username}`,
+              password: `${password}`
+            }
+          })
+        });
+        const result = await response.json();
+        console.log(result);
+        return result
+      } catch (err) {
+        console.error(err);
+      }
+}
+  
+
 
