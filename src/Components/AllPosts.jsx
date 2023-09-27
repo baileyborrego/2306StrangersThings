@@ -35,10 +35,16 @@ export default function AllPosts () {
          </label>
         </div>
         {postToDisplay.map((post)=> {
-            return <>
+            return <><div id="post">
             <h2 key={post.id}>{post.title}</h2>
-            <p>{post.price}</p>
             <p>{post.description}</p>
+            <p>Price: {post.price}</p>
+            <h3>Seller: {post.author.username}</h3>
+            <p>Location: {post.location}</p> {/* add if the seller is willing to deliver */}
+            <Link to={`/send-message/${post.author.username}`}> 
+            Send Message to Author
+          </Link> 
+          </div>
             <Link to={`/send-message/${post.author.username}`}>
             Send a message to the author
           </Link>

@@ -54,3 +54,9 @@ div#header h2 {
   color:rgb(239, 239, 255);
   font-weight: bold;
 }
+
+div#post {
+  background-color: rgb(41, 41, 41);
+  border: 5px outset rgb(41, 41, 41);
+  margin: 5px;
+}
