@@ -62,8 +62,6 @@ export const createUser = async (username, password) => {
       });
         const result = await response.json();
         console.log(result.data.token);
-        // this is returning the token, but is session storage being used right?
-        // Key value pair?
         sessionStorage.setItem = ("token", result.data.token)
         console.log(result)
         return result
