@@ -1,21 +1,23 @@
 import { useState } from 'react';
-import { fetchToken } from '../API';
+import { login } from '../API';
 // import { useNavigate} from "react-router-dom";
 
-export default function Authenticate({ token }) {
+export default function Authenticate() {
     const [successMessage, setSuccessMessage] = useState(null);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     // const navigate= useNavigate();
     
     async function handleClick(event){ 
       event.preventDefault();
-      const APIData = await fetchToken();
+      const APIData = await login(username, password);
       if (APIData.success){
         const username = APIData.data.username;
           // console.log(username)
           setSuccessMessage(`Welcome ${username}`)
       } else {
-            setError(APIData.error);
+            setError(APIData.error.message);
         }
     }
     return (
@@ -26,13 +28,17 @@ export default function Authenticate({ token }) {
         <form>
           <label>
             Username:<input
-            // value={username}
+            value={username}
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
             required
             />
           </label> <br></br>
           <label>
             Password:<input
             type='password'
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)}
             required/>
           </label>
         </form>
