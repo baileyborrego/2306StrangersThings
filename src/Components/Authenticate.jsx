@@ -13,8 +13,8 @@ export default function Authenticate() {
       event.preventDefault();
       const APIData = await login(username, password);
       if (APIData.success){
-        const username = APIData.data.username;
-          // console.log(username)
+          setUsername("");
+          setPassword("");
           setSuccessMessage(`Welcome ${username}`)
       } else {
             setError(APIData.error.message);
