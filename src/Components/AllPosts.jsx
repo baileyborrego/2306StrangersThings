@@ -1,5 +1,6 @@
 import { fetchAllPosts } from "../API";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function AllPosts () {
@@ -38,6 +39,9 @@ export default function AllPosts () {
             <h2 key={post.id}>{post.title}</h2>
             <p>{post.price}</p>
             <p>{post.description}</p>
+            <Link to={`/send-message/${post.author.username}`}>
+            Send Message to Author
+          </Link>
             </>
         })}
         </>
