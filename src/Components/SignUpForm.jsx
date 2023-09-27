@@ -4,6 +4,7 @@ import { createUser } from '../API';
 export default function SignUpForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [successMessage, setSuccessMessage] = useState(null);
     const [error, setError] = useState(null);
 
     async function handleSubmit(event) {
@@ -13,6 +14,7 @@ export default function SignUpForm() {
         if (APIData.success) {
             setUsername("");
             setPassword("");
+            setSuccessMessage(`Registration successful! Welcome ${username}!`)
 
         } else {
             setError(APIData.error)
@@ -21,6 +23,7 @@ export default function SignUpForm() {
     return (
         <>
             <h2>Sign Up!</h2>
+            {successMessage && <p>{successMessage}</p>}
             {error && <p>{error}</p>}
         
             <form onSubmit={handleSubmit}>
