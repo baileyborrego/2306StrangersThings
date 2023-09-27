@@ -34,7 +34,10 @@ export default function AllPosts () {
          </label>
         </div>
         {postToDisplay.map((post)=> {
-            return <h3 key={post.id}>{post.title}</h3>
+            return <>
+            <h2 key={post.id}>{post.title}</h2>
+            <p>{post.description}</p>
+            </>
         })}
         </>
         
