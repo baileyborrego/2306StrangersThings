@@ -20,7 +20,7 @@ function App() {
       <Link to='/'>All Posts</Link>
       <Link to='/users/register'>Register</Link>
       <Link to='/users/login'>Sign In</Link>
-      <Link to='/posts/POST_ID/messages'>Profile Messages</Link> //how to show at user login rather than a button on the nav bar?
+      <Link to='/posts/POST_ID/messages'>Messages</Link>    {/*how to show at user login rather than in nav bar?*/}
 
     </div>
     <Routes>
