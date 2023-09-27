@@ -1,7 +1,6 @@
 import { fetchAllPosts } from "../API";
 import { useState, useEffect } from "react";
 
-// Create a search form in here 
 
 export default function AllPosts () {
     const [posts, setPosts] = useState([]);
@@ -21,7 +20,7 @@ export default function AllPosts () {
     },[]);
 
     const postToDisplay = searchParam
-        ? posts.filter((post) => 
+        ? posts.filter((posts) => 
         posts.title.toLowerCase().includes(searchParam))
         : posts; 
     return (
@@ -34,7 +33,7 @@ export default function AllPosts () {
            onChange={(e) => setSearchParam(e.target.value.toLowerCase())}/>
          </label>
         </div>
-        {posts.map((post)=> {
+        {postToDisplay.map((post)=> {
             return <h3 key={post.id}>{post.title}</h3>
         })}
         </>

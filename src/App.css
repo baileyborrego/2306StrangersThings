@@ -34,3 +34,23 @@ div#header h1 {
 div#header h2 {
   margin: auto 15px auto 0px;
 }
+
+#nav {
+  background-color: black;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  padding: 5px;
+  justify-content: space-around;
+  bottom: 0;
+  height: 30px;
+}
+
+#nav a{
+  color:rgb(167, 163, 255);
+}
+
+#nav a:hover {
+  color:rgb(239, 239, 255);
+  font-weight: bold;
+}
