@@ -27,7 +27,7 @@ function App() {
         <Route path='/' element={<AllPosts />} />
         <Route path='/users/register' element={<SignUpForm token={token} setToken={setToken} />} />
         <Route path='/users/login' element={<Authenticate token={token} setToken={setToken}/>} />
-        <Route path='/' element={<MessageList />} />
+        <Route path='/posts/POST_ID/messages' element={<MessageList />} />
     </Routes>   
 
       

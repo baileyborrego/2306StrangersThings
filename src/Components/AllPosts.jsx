@@ -15,8 +15,8 @@ export default function AllPosts () {
             } else {
                 setError(APIResponse.error.message)
             }
-        }
-        getAllPosts();
+        } 
+        getAllPosts(); 
     },[]);
 
     const postToDisplay = searchParam
