@@ -15,7 +15,7 @@ function App() {
       <h1>Stranger's Things</h1>
       <h2>Welcome, [user]!</h2> {/* have this display the username of the person logged in, might need it to be in a different component, we'll see */}
     </div>
-    <div>
+    <div id="nav">
       <Link to='/'>All Posts</Link>
       <Link to='/users/register'>Register</Link>
       <Link to='/users/login'>Sign In</Link>
