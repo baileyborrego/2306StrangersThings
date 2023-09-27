@@ -1,9 +1,10 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import AllPosts from "./Components/AllPosts";
 import Authenticate from "./Components/Authenticate";
 import SignUpForm from "./Components/SignUpForm";
 import { useState } from 'react';
 import './App.css'
+import SendMessage from "./Components/SendMessage";
 // import MessageList from "./Components/MessageList";
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
         <Route path='/' element={<AllPosts />} />
         <Route path='/users/register' element={<SignUpForm token={token} setToken={setToken} />} />
         <Route path='/users/login' element={<Authenticate token={token} setToken={setToken}/>} />
+        <Route path='/send-message/:authorUsername' element={<SendMessage />} />
+
         {/* <Route path='/posts/POST_ID/messages' element={<MessageList />} /> */}
     </Routes>   
 
