@@ -116,9 +116,9 @@ export async function editPost(postId, updatedData) {
   }
 }
 
-export async function fetchMessages(token) {
+export async function fetchMessages(postId, token) {
     try {
-      const response = await fetch(`${BASE_URL}/messages`, {
+      const response = await fetch(`${BASE_URL}/posts/${postId}messages`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`

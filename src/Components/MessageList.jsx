@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { fetchMessages, sendMessageToPost, deleteMessage } from "../API";
 
-const MessageList = ({ token }) => {
+const MessageList = ({ token, postId }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     // grabbing the messages
-    fetchMessages()
+    fetchMessages(token, postId)
       .then((fetchedMessages) => setMessages(fetchedMessages))
       .catch((error) => console.error("Error fetching messages:", error));
-  }, []);
+  }, [postId, token]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === "") {
