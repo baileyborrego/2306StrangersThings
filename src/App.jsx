@@ -4,6 +4,7 @@ import Authenticate from "./Components/Authenticate";
 import SignUpForm from "./Components/SignUpForm";
 import { useState } from 'react';
 import './App.css'
+import MessageList from "./Components/MessageList";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -19,14 +20,14 @@ function App() {
       <Link to='/'>All Posts</Link>
       <Link to='/users/register'>Register</Link>
       <Link to='/users/login'>Sign In</Link>
-      {/* <Link to='/posts/POST_ID/messages'>Profile Messages</Link> */}
+      <Link to='/posts/POST_ID/messages'>Profile Messages</Link> //how to show at user login rather than a button on the nav bar?
 
     </div>
     <Routes>
         <Route path='/' element={<AllPosts />} />
         <Route path='/users/register' element={<SignUpForm token={token} setToken={setToken} />} />
         <Route path='/users/login' element={<Authenticate token={token} setToken={setToken}/>} />
-        {/* <Route path='/' element={<ProfileMessages />} /> */}
+        <Route path='/' element={<MessageList />} />
     </Routes>   
 
       
