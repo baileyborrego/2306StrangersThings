@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createUser } from '../API';
 
-export default function SignUpForm({setToken}) {
+export default function SignUpForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -9,13 +9,13 @@ export default function SignUpForm({setToken}) {
     async function handleSubmit(event) {
         event.preventDefault();
         const APIData = await createUser(username, password);
+        console.log(APIData)
         if (APIData.success) {
-            setToken(APIData.token);
             setUsername("");
             setPassword("");
 
         } else {
-            setError(APIData.error  )
+            setError(APIData.error)
         }
     }
     return (
