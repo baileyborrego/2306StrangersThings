@@ -45,6 +45,15 @@ export default function AllPosts () {
             Send Message to Author
           </Link> 
           </div>
+            <Link to={`/send-message/${post.author.username}`}>
+            Send a message to the author
+          </Link>
+            {/* not fully sure if this is working properly - might check the route*/}
+            {/* {token && ( // Check if the user is logged in (token is not null)
+          <Link to={`/send-message/${post.author.username}`}>
+            Send a message to the author
+          </Link>
+        )}   */}
             </>
         })}
         </>
