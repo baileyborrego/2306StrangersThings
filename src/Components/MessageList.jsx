@@ -1,44 +1,58 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchMessages, sendMessageToPost, deleteMessage } from "../API";
 
-const MessageList = ({ token, postId }) => {
+function MessageList({ postId }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // grabbing the messages
-    fetchMessages(token, postId)
-      .then((fetchedMessages) => setMessages(fetchedMessages))
-      .catch((error) => console.error("Error fetching messages:", error));
-  }, [postId, token]);
+    // Fetch messages when the component mounts or postId changes
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      fetchMessages(postId, token)
+        .then((data) => {
+          setMessages(data);
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
+    }
+  }, [postId]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === "") {
-      // delete trim if buggy, found it online
-      console.error("Cannot send an empty message.");
+      setError("Cannot send an empty message.");
       return;
     }
 
-    try {
-      const result = await sendMessageToPost(token, newMessage);
-      // Assuming the API returns the updated list of messages after sending - im trying to streamline this into one component
-      setMessages(result.messages);
-      setNewMessage(""); // hopefully shows a blank space after the message sent
-    } catch (error) {
-      console.error("Error sending message:", error);
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      try {
+        const result = await sendMessageToPost(postId, newMessage, token);
+        setMessages(result.messages);
+        setNewMessage("");
+      } catch (error) {
+        setError("Error sending message. Please try again.");
+      }
+    } else {
+      setError("You must be logged in to send a message.");
     }
   };
 
   const handleDeleteMessage = async (messageId) => {
-    try {
-      await deleteMessage(token, messageId);
-      // filter out the deleted message from the current messages - so you actually delete messages
-      const updatedMessages = messages.filter(
-        (message) => message._id !== messageId
-      );
-      setMessages(updatedMessages);
-    } catch (error) {
-      console.error("Error deleting message:", error);
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      try {
+        await deleteMessage(messageId, token);
+        // Filter out the deleted message from the current messages
+        const updatedMessages = messages.filter(
+          (message) => message._id !== messageId
+        );
+        setMessages(updatedMessages);
+      } catch (error) {
+        setError("Error deleting message. Please try again.");
+      }
     }
   };
 
@@ -48,8 +62,8 @@ const MessageList = ({ token, postId }) => {
       <ul>
         {messages.map((message) => (
           <li key={message._id}>
-            From:{message.sender.username}: {message.text}
-            {message.sender._id === token._id && (
+            From: {message.sender.username}: {message.text}
+            {message.sender._id === token && (
               <button onClick={() => handleDeleteMessage(message._id)}>
                 Delete
               </button>
@@ -65,9 +79,10 @@ const MessageList = ({ token, postId }) => {
           onChange={(e) => setNewMessage(e.target.value)}
         />
         <button onClick={handleSendMessage}>Send</button>
+        {error && <p>{error}</p>}
       </div>
     </div>
   );
-};
+}
 
 export default MessageList;
