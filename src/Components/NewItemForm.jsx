@@ -29,6 +29,8 @@ export default function CreatePostForm({
     }
 
     return (
+      <>
+      <h2>New Post</h2>
       <form onSubmit={handleSubmit}>
         {error && <p>{error}</p>}
         <input
@@ -54,5 +56,6 @@ export default function CreatePostForm({
         />
         <button>Submit</button>
       </form>
+      </>
     );
   }
