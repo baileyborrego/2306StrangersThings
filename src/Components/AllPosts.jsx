@@ -37,17 +37,14 @@ export default function AllPosts () {
         {postToDisplay.map((post)=> {
             return <><div id="post">
             <h2 key={post.id}>{post.title}</h2>
-            <p>{post.description}</p>
+            <p className="description">{post.description}</p>
             <p>Price: {post.price}</p>
             <h3>Seller: {post.author.username}</h3>
             <p>Location: {post.location}</p> {/* add if the seller is willing to deliver */}
             <Link to={`/send-message/${post.author.username}`}> 
-            Send Message to Author
+            Send Message
           </Link> 
           </div>
-            {/* <Link to={`/send-message/${post.author.username}`}>
-            Send a message to the author
-          </Link> */}
             {/* not fully sure if this is working properly - might check the route*/}
             {/* {token && ( // Check if the user is logged in (token is not null)
           <Link to={`/send-message/${post.author.username}`}>

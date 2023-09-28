@@ -67,3 +67,15 @@ div#post {
 h2 {
   margin: 0px;
 }
+
+p {
+  margin: 0px;
+}
+
+h3 {
+  margin: 0px;
+}
+
+p.description {
+  color:rgb(186, 186, 186);
+}
