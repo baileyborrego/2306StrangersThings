@@ -6,6 +6,7 @@ body {
   background-color: rgb(26, 26, 26);
   color:white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /*temporary font*/
+  padding-bottom: 50px;
 }
 
 #root {
@@ -59,4 +60,10 @@ div#post {
   background-color: rgb(41, 41, 41);
   border: 5px outset rgb(41, 41, 41);
   margin: 5px;
+  text-align: left;
+  padding: 10px;
+}
+
+h2 {
+  margin: 0px;
 }
