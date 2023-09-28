@@ -39,21 +39,28 @@ export default function CreatePostForm({
           name="title"
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
-        />
+        /><br/>
         <input
           value={description}
           type="text"
           name="description"
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
-        />
+        /><br/>
         <input
           value={location}
           type="text"
           name="location"
           placeholder="Location"
-          onChange={(e) => setDescription(e.target.value)}
-        />
+          onChange={(e) => setLocation(e.target.value)}
+        /><br/>
+        <input
+          value={price}
+          type="text"
+          name="price"
+          placeholder="Price"
+          onChange={(e) => setPrice(e.target.value)}
+        /><br/>
         <button>Submit</button>
       </form>
       </>
