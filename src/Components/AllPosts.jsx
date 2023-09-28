@@ -1,6 +1,7 @@
 import { fetchAllPosts } from "../API";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import CreatePostForm from "./NewItemForm";
 
 
 export default function AllPosts () {
@@ -34,6 +35,7 @@ export default function AllPosts () {
            onChange={(e) => setSearchParam(e.target.value.toLowerCase())}/>
          </label>
         </div>
+        <CreatePostForm posts={posts} setPosts={setPosts} />
         {postToDisplay.map((post)=> {
             return <><div id="post">
             <h2 key={post.id}>{post.title}</h2>

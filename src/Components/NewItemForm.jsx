@@ -1,29 +1,58 @@
-// mostly done i think, may be a slight work in progress still
-const COHORT_NAME = '2306-FTB-ET-WEB-AM';
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+import React, {useState} from "react";
+import { createPost } from "../API";
 
-const makePost = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/posts`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        post: {
-          title: title,
-          description: description,
-          price: price,
-          location: location,
-          willDeliver: true
-        }
-      })
-    });
-    const result = await response.json();
-    console.log(result);
-    return result
-  } catch (error) {
-    console.error(error);
+export default function CreatePostForm({
+  post, setPost }) {
+    const [username, setUsername] = useState("");
+    const [title, setTitle] = useState("");
+    const [location, setLocation] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [error, setError] = useState(null);
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const APIData = await createPost(username, description, price, location);
+      if (APIData.success) {
+        console.log("New Post: ", APIData.data.newPost);
+
+        const newPostsList = [...posts, APIData.data.newPost];
+        setPosts(newPostsList);
+
+        setPrice("");
+        setLocation("");
+        setDescription("");
+        setTitle("");
+      } else {
+        setError(APIData.error.message);
+      }
+    }
+
+    return (
+      <form onSubmit={handleSubmit}>
+        {error && <p>{error}</p>}
+        <input
+          value={title}
+          type="text"
+          name="title"
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          value={description}
+          type="text"
+          name="description"
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <input
+          value={location}
+          type="text"
+          name="location"
+          placeholder="Location"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <button>Submit</button>
+      </form>
+    );
   }
-}

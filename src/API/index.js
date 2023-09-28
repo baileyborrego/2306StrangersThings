@@ -21,9 +21,14 @@ export async function createPost(postData, token) {
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
-                ...postData,
-                username: token.username 
-            }),
+              post: {
+                title: title,
+                description: description,
+                price: price,
+                location: location,
+                willDeliver: true
+              }
+            })
         });
         const result = await response.json();
         return result;
