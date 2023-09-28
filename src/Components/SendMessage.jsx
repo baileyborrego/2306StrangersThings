@@ -31,6 +31,7 @@ export default function SendMessage() {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
+        <br/>
         <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
