@@ -80,7 +80,8 @@ export const login = async (username, password) => {
         const response = await fetch(`${BASE_URL}/users/login`, {
           method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             user: {
@@ -118,6 +119,38 @@ export async function editPost(postId, updatedData) {
   } catch (err) {
       console.error('Uh oh, trouble editing the post!', err);
       return null; // can handle the error as needed
+  }
+}
+
+export async function fetchUserProfile(token) {
+  try {
+      const response = await fetch(`${BASE_URL}/users/me`, {
+          method: "GET",
+          headers: {
+              "Authorization": `Bearer ${token}`,
+          },
+      });
+      const userData = await response.json();
+      return userData;
+  } catch (error) {
+      console.error('Error fetching user profile:', error);
+      throw error;
+  }
+}
+
+export async function fetchUserMessages(token) {
+  try {
+      const response = await fetch(`${BASE_URL}/users/me/messages`, {
+          method: "GET",
+          headers: {
+              "Authorization": `Bearer ${token}`,
+          },
+      });
+      const userMessages = await response.json();
+      return userMessages;
+  } catch (error) {
+      console.error('Error fetching user messages:', error);
+      throw error;
   }
 }
 

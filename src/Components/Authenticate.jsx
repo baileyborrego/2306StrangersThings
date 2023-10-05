@@ -1,24 +1,30 @@
 import { useState } from 'react';
 import { login } from '../API';
+import { useNavigate } from 'react-router-dom';
 // import { useNavigate} from "react-router-dom";
 
 export default function Authenticate() {
+  const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState(null);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     // const navigate= useNavigate();
     
-    async function handleClick(event){ 
+    async function handleClick(event) {
       event.preventDefault();
       const APIData = await login(username, password);
-      if (APIData.success){
-          setUsername("");
-          setPassword("");
-          setSuccessMessage(`Welcome ${username}`)
+      
+      if (APIData.success) {
+        setUsername("");
+        setPassword("");
+        setSuccessMessage(`Welcome ${username}`);
+        
+        // Store the token in state (e.g., you can use context or a 
+        navigate('/profile');
       } else {
-            setError(APIData.error.message);
-        }
+        setError(APIData.error.message);
+      }
     }
     return (
     <>
